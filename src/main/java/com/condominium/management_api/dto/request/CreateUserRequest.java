@@ -1,6 +1,7 @@
 package com.condominium.management_api.dto.request;
 
 import com.condominium.management_api.enums.UserRole;
+import io.micrometer.common.lang.Nullable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -22,6 +23,11 @@ public class CreateUserRequest {
 
     @Pattern(regexp = "^(ADMIN|RESIDENT|STAFF)$", message = "El rol debe ser ADMIN, RESIDENT o STAFF")
     private String userRole = UserRole.RESIDENT.name();
+
+    @Pattern(regexp = "^(CONSERJE|MANTENIMIENTO|SEGURIDAD|LIMPIEZA)$",
+            message = "Tipo de staff inválido")
+    @Nullable
+    private String staffType;
 
     @Pattern(regexp = "^\\+56[0-9]{9}$" ,message = "El teléfono debe tener formato +56 seguido de 9 dígitos")
     private String phoneNumber;
